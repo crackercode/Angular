@@ -8,6 +8,12 @@ import { User } from '../../model/User'
 })
 export class UsersComponent implements OnInit {
 
+  user: User = {
+    firstName: '',
+    lastName: '',
+    age: undefined
+  }
+
   users: User[];
   showExtended: boolean = false;
   loaded: boolean = false;
@@ -63,5 +69,20 @@ export class UsersComponent implements OnInit {
       }
     ]
   };
+
+  addUser() {
+    console.log("addUser");
+    this.users.unshift(this.user);
+    this.user = {
+      firstName: '',
+      lastName: '',
+      age: undefined
+    }
+  }
+
+  onSubmit(e: any) {
+    e.preventDefault();
+    console.log(this.user.firstName);
+  }
 
 }
