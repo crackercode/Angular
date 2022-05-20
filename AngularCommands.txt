@@ -9,6 +9,11 @@ npm start
 ng g component new-comp
 ng g component ../new-comp
 ng g component practice/users
+ng g component practice/datatypes
+ng g component practice/home
+ng g component practice/navbar
+
+ng g module app-routing --flat --module=app
 
 #ID .Class
 

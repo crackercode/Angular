@@ -5,12 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsersComponent } from './practice/users/users.component';
 import { DatatypesComponent } from './practice/datatypes/datatypes.component';
+import { HomeComponent } from './practice/home/home.component';
+import { NavbarComponent } from './practice/navbar/navbar.component';
+import { PostComponent } from './practice/post/post.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
-    DatatypesComponent
+    DatatypesComponent,
+    HomeComponent,
+    NavbarComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
