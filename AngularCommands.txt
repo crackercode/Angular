@@ -2,6 +2,20 @@ chrome.exe --disable-web-security --user-data-dir=C:/Program Files/Google/Chrom/
 
 https://angular.io/cli
 
+npm install -g @angular/cli
+npm install -g @angular/cli@13.3.3 npm@8.11.0
+npm install --legacy-peer-deps
+
 ng new app-name
 ng serve
+ng serve --open
 npm start
+
+ng g component new-cmp
+ng g c ../new-cmp
+ng g c components/sample1/user
+ng g c components/templatesyntax/user
+ng g c component/nav-bar --spec=false [Note --spec=false. Disalbe spec file]
+ng g s services/data --module=app.module
+
+npm cache clean --force

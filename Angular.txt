@@ -1,0 +1,16 @@
+VS Plugins to install
+
+Angular v5 Snippets - John Papa
+Bracket pair colorizer
+Mithril Emmet - FallenMax
+Prettier - Code formatter - Prettier
+Auto rename tag - Jun Han
+Color highlight - Sergii Naumov
+Image preview - Kiss Tamas
+
+VS Commands
+
+
+
+package.json
+
