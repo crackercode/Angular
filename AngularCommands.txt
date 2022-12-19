@@ -12,9 +12,12 @@ ng serve --open
 npm start
 
 ng g component new-cmp
+ng g s services/data --module=app.module
+
+ng g component new-cmp
 ng g c ../new-cmp
 ng g c components/sample1/user
-ng g c components/templatesyntax/user
+ng g c components/sampleevents/user
 ng g c component/nav-bar --spec=false [Note --spec=false. Disalbe spec file]
 ng g s services/data --module=app.module
 

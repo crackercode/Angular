@@ -15,16 +15,19 @@ import { DatatypesComponent } from './practice/datatypes/datatypes.component';
 import { HomeComponent } from './practice/home/home.component';
 import { NavbarComponent } from './practice/navbar/navbar.component';
 import { PostComponent } from './practice/post/post.component';
+import { UsereventsComponent } from './components/sampleevents/userevents/userevents.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    UserComponent,
     UsersComponent,
     DatatypesComponent,
     HomeComponent,
     NavbarComponent,
-    PostComponent
+    PostComponent,
+    UsereventsComponent
   ],
   imports: [
     BrowserModule,
