@@ -16,10 +16,11 @@ export class UsersComponent implements OnInit {
   }
 
   users: User[];
-  showExtended: boolean = false;
+  // showExtended: boolean = false;
   showAddUser: boolean = false;
   loaded: boolean = false;
   classBinding = {};
+  ngSytleBind = {};
 
   constructor(private dataService: DataService) {
     this.users = [];
@@ -29,9 +30,10 @@ export class UsersComponent implements OnInit {
 
     setTimeout(() => {
       this.loaded = true;
-      this.showExtended = true;
+      // this.showExtended = true;
     }, 1000);
     this.bindToClass();
+    this.bindNgStyle();
 
     // this.user = this.dataService.getUsers();
     this.users = [
@@ -45,7 +47,10 @@ export class UsersComponent implements OnInit {
           state: 'WP'
         },
         image: 'https://picsum.photos/id/237/200/300',
-        isActive: true
+        isActive: true,
+        balance: 100,
+        registered: new Date('01/02/2018 08:30:00'),
+        hide: true
       },
       {
         firstName: 'Kevin',
@@ -57,7 +62,10 @@ export class UsersComponent implements OnInit {
           state: 'WP'
         },
         image: 'https://picsum.photos/seed/picsum/200/300',
-        isActive: false
+        isActive: false,
+        balance: 200,
+        registered: new Date('01/02/2020 01:30:00'),
+        hide: true
       },
       {
         firstName: 'Peter',
@@ -74,13 +82,16 @@ export class UsersComponent implements OnInit {
         firstName: 'Tenz',
         lastName: 'K',
         age: 33,
-        isActive: true
+        isActive: true,
+        hide: true
       }
     ]
   };
 
   addUser() {
     console.log("addUser");
+    this.user.isActive = true;
+    this.user.registered = new Date();
     this.users.unshift(this.user);
     this.user = {
       firstName: '',
@@ -89,7 +100,8 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  showAddUserForm() {
+  showAddUserForm(e: Event) {
+    console.log(e);
     this.showAddUser = !this.showAddUser;
     this.bindToClass();
   }
@@ -102,6 +114,13 @@ export class UsersComponent implements OnInit {
   bindToClass() {
     this.classBinding = {
       'btn-success': !this.showAddUser
+    }
+  }
+
+  bindNgStyle() {
+    this.ngSytleBind = {
+      'padding-top': '50px',
+      'font-size': '40px'
     }
   }
 

@@ -1,5 +1,6 @@
 <div class="card div-padding">
-    <button class="btn btn-block" (click)="showAddUserForm()" [ngClass]="classBinding">Add User</button>
+    <!-- button ->  (mouseover) (keydown) (keyup) (mouseup) (mouseout) (dbclick) (dragover) -->
+    <button class="btn btn-block" (click)="showAddUserForm($event)" [ngClass]="classBinding">Add User</button>
     <div *ngIf="showAddUser">
         <div class="card-header">
             <h2>Add User</h2>
@@ -9,13 +10,15 @@
             <form (submit)="onSubmit($event)">
                 <div class="form-group">
                     <label>First Name</label>
+                    <!-- input -> (keydown) (keypress) (focus) (blur) (cut) (paste) copy) -->
                     <input type="text" [(ngModel)]="user.firstName" class="form-control" name="firtName">
                 </div>
                 <div class="form-group">
                     <label>Last Name</label>
                     <input type="text" [(ngModel)]="user.lastName" class="form-control" name="lastName">
                 </div>
-                <button (click)="addUser()" class="btn btn-primary">Add New User</button>
+                <button (click)="addUser()" [disabled]="user.firstName == '' || user.lastName == ''"
+                    class="btn btn-primary">Add New User</button>
             </form>
         </div>
     </div>
@@ -27,18 +30,36 @@
 <!-- style="padding-right: 150px; padding-left: 80px" -->
 <div class="div-padding">
     <ul class="list-unstyled" *ngIf="loaded && users.length > 0">
-        <li class="card card-body mb-2" *ngFor="let user of users" [class.bg-light]="user.isActive">
+        <li class="card card-body mb-2" *ngFor="let user of users" [class.bg-light]="user.isActive"
+            [style.border-color]="user.isActive ? 'green':''">
             <div class="row">
                 <div class="col-sm-4">
                     <img class="img-fluid" [src]="user.image" alt="">
                     <!-- <img src="{{user.image}}" alt=""> -->
                 </div>
                 <div class="col-sm-8">
-                    <h3>{{this.user.firstName}} {{this.user.lastName}}</h3>
-                    <ul class="list-group" *ngIf="showExtended && user.address && user.age">
+                    <!-- {{this.user.lastName | uppercase}} -->
+                    <h3 [ngStyle]="ngSytleBind">{{this.user.firstName }} {{this.user.lastName | uppercase}}
+                        <small *ngIf="user.address && user.age"><button class="btn btn-dark"
+                                (click)="user.hide = !user.hide"><i
+                                    [ngClass]="user.hide ? 'fa fa-plus':'fa fa-minus'"></i></button></small>
+                    </h3>
+                    <ul class="list-group" *ngIf="!user.hide && user.address && user.age">
+                        <!-- <ul class="list-group"> -->
                         <li class="list-group-item">Age : {{this.user.age}}</li>
                         <li class="list-group-item">Address : {{this.user.address.street}} {{this.user.address.city}}
                             {{this.user.address.state}}</li>
+                        <li class="list-group-item">Balance : {{user.balance | currency: "GBP"}} until {{ .5 | percent}}
+                        </li>
+                        <!-- {{user.balance | currency: "GBP": "code"}}
+                        {{user.balance | currency: "GBP": "symbol"}} -->
+                        <li class="list-group-item">Joined : {{user.registered | date: "mm/dd/yyyy"}}</li>
+                        <!-- {{user.registered | date: "shortDate"}}
+                        {{user.registered | date: "longDate"}}
+                        {{user.registered | date: "longTime"}}
+                        {{user.registered | date: "fullDate"}}
+                        https://angular.io/api/common/DatePipe -->
+                        <!-- <li class="list-group-item" ngNonBindable>{{ 5 | number : "2.4"}}</li> -->
                     </ul>
                 </div>
             </div>
