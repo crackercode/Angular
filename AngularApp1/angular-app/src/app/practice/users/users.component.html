@@ -7,10 +7,43 @@
         </div>
         <div class="card-card-body mb-3">
 
-            <form (submit)="onSubmit($event)">
+            <!-- Template Driven Forms -->
+            <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
                 <div class="form-group">
                     <label>First Name</label>
                     <!-- input -> (keydown) (keypress) (focus) (blur) (cut) (paste) copy) -->
+                    <input type="text" [(ngModel)]="user.firstName" class="form-control" 
+                    name="firtName"
+                    #userFirstName="ngModel"
+                    [ngClass]="{'is-invalid':userFirstName.errors && userFirstName.touched}"                   
+                    required
+                    minlength="2">
+                    <div [hidden]="!userFirstName.errors?.['required']" class="invalid-feedback">First Name Required</div>
+                    <div [hidden]="!userFirstName.errors?.['minlength']" class="invalid-feedback">Must be at least 2 characters</div>
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" [(ngModel)]="user.lastName" class="form-control" name="lastName">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" [(ngModel)]="user.email" class="form-control" name="email"
+                    #userEmail="ngModel"
+                    [ngClass]="{'is-invalid':userEmail.errors && userEmail.touched}"    
+                    required
+                    pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$">
+                    <div [hidden]="!userEmail.errors?.['required']" class="invalid-feedback">Email Required</div>
+                    <div [hidden]="!userEmail.errors?.['pattern']" class="invalid-feedback">Email is not valid</div>
+                </div>
+                <button (click)="addUser()" [disabled]="!userForm.form.valid"
+                    class="btn btn-primary">Add New User</button>
+            </form>
+
+            <!--
+            <form (submit)="onSubmit($event)">
+                <div class="form-group">
+                    <label>First Name</label>
+                    !-- input -> (keydown) (keypress) (focus) (blur) (cut) (paste) copy) --
                     <input type="text" [(ngModel)]="user.firstName" class="form-control" name="firtName">
                 </div>
                 <div class="form-group">
@@ -20,6 +53,7 @@
                 <button (click)="addUser()" [disabled]="user.firstName == '' || user.lastName == ''"
                     class="btn btn-primary">Add New User</button>
             </form>
+            -->
         </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../../model/User'
 import { DataService } from 'src/app/services/data.service';
 
@@ -21,6 +21,7 @@ export class UsersComponent implements OnInit {
   loaded: boolean = false;
   classBinding = {};
   ngSytleBind = {};
+  @ViewChild('userForm') form: any;
 
   constructor(private dataService: DataService) {
     this.users = [];
@@ -106,10 +107,34 @@ export class UsersComponent implements OnInit {
     this.bindToClass();
   }
 
-  onSubmit(e: any) {
-    e.preventDefault();
-    console.log(this.user.firstName);
+  // onSubmit({ value, valid }: { value: User, valid: boolean }) {
+  onSubmit({ value }: { value: User }) {
+    if (this.form.valid) {
+      console.log("Form is not valid");
+    } else {
+      value.isActive = true;
+      value.registered = new Date();
+      value.hide = true;
+      this.users.unshift(value);
+      this.form.resetForm();
+
+      Object.keys(this.form.controls).forEach((key) => {
+        const control = this.form.controls[key];
+        control.markAsPristine();
+        control.markAsUntouched();
+        control.setErrors(null);
+    });
+      // this.form.markAsUntouched();
+      // this.form.markAsPristine();
+      // this.form.setErrors(null);
+      this.form.resetValidation();
+    }
   }
+
+  // onSubmit(e: any) {
+  //   e.preventDefault();
+  //   console.log(this.user.firstName);
+  // }
 
   bindToClass() {
     this.classBinding = {
