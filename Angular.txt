@@ -10,7 +10,9 @@ Image preview - Kiss Tamas
 
 VS Commands
 
+What is a service? - Classes that can send functionality and data across multiple components
 
+Injectable - Decorator that marks a class as available to be provided and injected as a dependency.
 
 package.json
 
