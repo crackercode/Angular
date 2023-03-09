@@ -9,7 +9,7 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class UsersComponent implements OnInit {
 
-  user: User = {
+  selectedUser: User = {
     firstName: '',
     lastName: '',
     age: undefined
@@ -36,70 +36,72 @@ export class UsersComponent implements OnInit {
     this.bindToClass();
     this.bindNgStyle();
 
-    // this.user = this.dataService.getUsers();
-    this.users = [
-      {
-        firstName: 'John',
-        lastName: 'Doe',
-        age: 30,
-        address: {
-          street: '111',
-          city: 'Kandy',
-          state: 'WP'
-        },
-        image: 'https://picsum.photos/id/237/200/300',
-        isActive: true,
-        balance: 100,
-        registered: new Date('01/02/2018 08:30:00'),
-        hide: true
-      },
-      {
-        firstName: 'Kevin',
-        lastName: 'John',
-        age: 31,
-        address: {
-          street: '222',
-          city: 'Col',
-          state: 'WP'
-        },
-        image: 'https://picsum.photos/seed/picsum/200/300',
-        isActive: false,
-        balance: 200,
-        registered: new Date('01/02/2020 01:30:00'),
-        hide: true
-      },
-      {
-        firstName: 'Peter',
-        lastName: 'Kent',
-        age: 32,
-        address: {
-          street: '333',
-          city: 'Kandy',
-          state: 'WP'
-        }, image: 'https://picsum.photos/200/300?grayscale',
-        isActive: true
-      },
-      {
-        firstName: 'Tenz',
-        lastName: 'K',
-        age: 33,
-        isActive: true,
-        hide: true
-      }
-    ]
+    this.users = this.dataService.getUsers();
+    // this.users = [
+    //   {
+    //     firstName: 'John',
+    //     lastName: 'Doe',
+    //     age: 30,
+    //     address: {
+    //       street: '111',
+    //       city: 'Kandy',
+    //       state: 'WP'
+    //     },
+    //     image: 'https://picsum.photos/id/237/200/300',
+    //     isActive: true,
+    //     balance: 100,
+    //     registered: new Date('01/02/2018 08:30:00'),
+    //     hide: true
+    //   },
+    //   {
+    //     firstName: 'Kevin',
+    //     lastName: 'John',
+    //     age: 31,
+    //     address: {
+    //       street: '222',
+    //       city: 'Col',
+    //       state: 'WP'
+    //     },
+    //     image: 'https://picsum.photos/seed/picsum/200/300',
+    //     isActive: false,
+    //     balance: 200,
+    //     registered: new Date('01/02/2020 01:30:00'),
+    //     hide: true
+    //   },
+    //   {
+    //     firstName: 'Peter',
+    //     lastName: 'Kent',
+    //     age: 32,
+    //     address: {
+    //       street: '333',
+    //       city: 'Kandy',
+    //       state: 'WP'
+    //     }, image: 'https://picsum.photos/200/300?grayscale',
+    //     isActive: true
+    //   },
+    //   {
+    //     firstName: 'Tenz',
+    //     lastName: 'K',
+    //     age: 33,
+    //     isActive: true,
+    //     hide: true
+    //   }
+    // ]
   };
 
-  addUser() {
-    console.log("addUser");
-    this.user.isActive = true;
-    this.user.registered = new Date();
-    this.users.unshift(this.user);
-    this.user = {
-      firstName: '',
-      lastName: '',
-      age: undefined
-    }
-  }
+  //Noramal Button Click Function
+  // addUser() {
+  //   console.log("addUser");
+  //   this.selectedUser.isActive = true;
+  //   this.selectedUser.registered = new Date();
+  //   // this.users.unshift(this.user);
+  //   this.selectedUser = {
+  //     firstName: '',
+  //     lastName: '',
+  //     age: undefined
+  //   }
+  //   this.dataService.addUsers(this.selectedUser);
+  // }
 
   showAddUserForm(e: Event) {
     console.log(e);
@@ -107,15 +109,18 @@ export class UsersComponent implements OnInit {
     this.bindToClass();
   }
 
+  //Form Submission
   // onSubmit({ value, valid }: { value: User, valid: boolean }) {
   onSubmit({ value }: { value: User }) {
-    if (this.form.valid) {
+    if (!this.form.valid) {
       console.log("Form is not valid");
     } else {
+      
       value.isActive = true;
       value.registered = new Date();
-      value.hide = true;
-      this.users.unshift(value);
+      value.hide = false;
+      // this.users.unshift(value);
+      this.dataService.addUsers(value);
       this.form.resetForm();
 
       Object.keys(this.form.controls).forEach((key) => {
@@ -127,13 +132,15 @@ export class UsersComponent implements OnInit {
       // this.form.markAsUntouched();
       // this.form.markAsPristine();
       // this.form.setErrors(null);
-      this.form.resetValidation();
+      // this.form.resetValidation();
+      debugger;
+      console.log(this.dataService.getUsers())
     }
   }
 
   // onSubmit(e: any) {
   //   e.preventDefault();
-  //   console.log(this.user.firstName);
+  //   console.log(this.selectedUser.firstName);
   // }
 
   bindToClass() {

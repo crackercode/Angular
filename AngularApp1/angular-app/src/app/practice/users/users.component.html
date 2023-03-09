@@ -35,7 +35,7 @@
                     <div [hidden]="!userEmail.errors?.['required']" class="invalid-feedback">Email Required</div>
                     <div [hidden]="!userEmail.errors?.['pattern']" class="invalid-feedback">Email is not valid</div>
                 </div>
-                <button (click)="addUser()" [disabled]="!userForm.form.valid"
+                <button [disabled]="!userForm.form.valid"
                     class="btn btn-primary">Add New User</button>
             </form>
 
@@ -73,16 +73,16 @@
                 </div>
                 <div class="col-sm-8">
                     <!-- {{this.user.lastName | uppercase}} -->
-                    <h3 [ngStyle]="ngSytleBind">{{this.user.firstName }} {{this.user.lastName | uppercase}}
+                    <h3 [ngStyle]="ngSytleBind">{{user.firstName }} {{user.lastName | uppercase}}
                         <small *ngIf="user.address && user.age"><button class="btn btn-dark"
                                 (click)="user.hide = !user.hide"><i
                                     [ngClass]="user.hide ? 'fa fa-plus':'fa fa-minus'"></i></button></small>
                     </h3>
                     <ul class="list-group" *ngIf="!user.hide && user.address && user.age">
                         <!-- <ul class="list-group"> -->
-                        <li class="list-group-item">Age : {{this.user.age}}</li>
-                        <li class="list-group-item">Address : {{this.user.address.street}} {{this.user.address.city}}
-                            {{this.user.address.state}}</li>
+                        <li class="list-group-item">Age : {{user.age}}</li>
+                        <li class="list-group-item">Address : {{user.address.street}} {{user.address.city}}
+                            {{user.address.state}}</li>
                         <li class="list-group-item">Balance : {{user.balance | currency: "GBP"}} until {{ .5 | percent}}
                         </li>
                         <!-- {{user.balance | currency: "GBP": "code"}}

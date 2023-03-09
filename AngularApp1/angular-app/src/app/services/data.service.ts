@@ -13,7 +13,7 @@ export class DataService {
     this.users = [
       {
         firstName: 'John',
-        lastName: 'Doe',
+        lastName: 'Doe From Service',
         age: 30,
         address: {
           street: '111',
@@ -53,6 +53,11 @@ export class DataService {
   }
 
   getUsers(): User[] {
+    return this.users;
+  }
+
+  addUsers(user: User): User[] {
+    this.users.unshift(user);
     return this.users;
   }
 }
